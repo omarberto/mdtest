@@ -6,7 +6,7 @@
 4. installed AX Etw Traxing and SQLDMV Monitor  version 0.5 or higher
 5. installed and configured Zampat repository (please refer to <https://github.com/zampat/neteye4/blob/master/doc/050_community_configs_init.md>) on the neteye master
 
-Note: Zampat repository is required as configuration is based on the Host template generic-passive-host and Service template generic-passive-service
+>Zampat repository is required as configuration is based on the Host template generic-passive-host and Service template generic-passive-service
 
 ### Tornado Nats Collector Service
 
@@ -14,9 +14,11 @@ Define topic name to use for nats communication
 
 <agent_monitor_alive.topic> = name which must be configured on nats.server and on axetwtracing and sqldmvmonitor config files.
 
+### Icinga Directory Objects for EndPoint monitor
+
 Configuration of neteye Icinga Directory Objects for EndPoint monitor
 
-a) Create Data Fields (dummy_text and dummy_state)
+1. Create Data Fields (dummy_text and dummy_state)
 ```
 dummy_text :
 Fieldname : dummy_text
@@ -30,7 +32,7 @@ Caption : Dummy State
 Data Type: Number
 ```
 
-b) Create Command (keepalive_check and monitordata_check)
+2. Create Command (keepalive_check and monitordata_check)
 
 Create command for keepalive_check:
 ```
@@ -82,7 +84,7 @@ Value Type: String
 Value: $dummy_text$
 Position: 2
 
-c) Create Service templates (generic_keepalive_service and generic_monitordata_service)
+3. Create Service templates (generic_keepalive_service and generic_monitordata_service)
 create template Service "generic_keepalive_service"
 
 Main properties
