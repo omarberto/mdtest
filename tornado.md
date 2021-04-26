@@ -18,7 +18,13 @@ Define topic name to use for nats communication
 
 Configuration of neteye Icinga Directory Objects for EndPoint monitor
 
+![define_data_fields](define_data_fields.png)
+
 1. Create Data Fields (dummy_text and dummy_state)
+
+
+![new_dummy_text_data_field](new_dummy_text_data_field.png)
+
 ```
 dummy_text :
 Fieldname : dummy_text
@@ -109,24 +115,29 @@ Check execution
     retry_interval : 15s
     enable_active_checks : yes
 
-Configuration of nats user and permissions
-==========================================
+### Configuration of nats user and permissions
 
 Define permission for ax and sql agents on nats server
 
-create conf file  agents-nats-json-publisher.conf /neteye/shared/nats-server/conf/permissions.d:
+create conf file *agents-nats-json-publisher.conf* in folder */neteye/shared/nats-server/conf/permissions.d*
 
+```
   AGENT_MONITOR_ALIVE_METRICS = {
     publish = "tornado_nats_json.>"
   }
+```
 
 Define user for ax and sql agents on nats server
+create conf file *<user>.conf* in */neteye/shared/nats-server/conf/users.d*
 
-create conf file /neteye/shared/nats-server/conf/users.d:
-  {user: "agents.pele.dev", permissions: $AGENT_MONITOR_ALIVE_METRICS}
+```
+  {
+    user: "agents.pele.dev", 
+    permissions: $AGENT_MONITOR_ALIVE_METRICS
+  }
+```
 
-Configuration of tornado json collector
-=======================================
+### Configuration of tornado nats json collector
 
 To be able to listen and consume events of the agent keepalive and monitordata, the defined topic <agent_monitor_alive.topic> must be configured in
 /neteye/shared/tornado_nats_json_collector/topics path. For this create the needed <topic>.json configuration file:
