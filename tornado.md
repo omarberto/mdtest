@@ -138,12 +138,10 @@ create conf file *\<user\>.conf* in */neteye/shared/nats-server/conf/users.d*
   }
 ```
 
-### Configuration of tornado nats json collector
+### Configuration of tornado\_nats\_json\_collector service
 
-To be able to listen and consume events of the agent keepalive and monitordata, the defined topic <agent_monitor_alive.topic> must be configured in
-/neteye/shared/tornado_nats_json_collector/topics path. For this create the needed <topic>.json configuration file:
+The nats\_json\_collector service listens only to events of defined topics: create *\<agent\_monitor\_alive\.topic\>\.json* files in */neteye/shared/tornado\_nats\_json\_collector/topics* with the following syntax
 
-e.g. <topic>.json file:
 ```
   {
     "nats_topics": [<agent_monitor_alive.topic>],
@@ -156,9 +154,11 @@ e.g. <topic>.json file:
     }
   }
 ```
-In this file nats topics are defined (nats_topic can be changed). Defines transformation rule for messages sent from agents to tornado syntax (leave this part without changes)
 
-Please validate that the  tornado group has read rights on file <topic>.json and in case assign the permissions required:
+>*collector_config* defines inner transformation rules from agents'messages to tornado messages and cannot be modified
+
+>*tornado* group must have read rights on file *\<agent\_monitor\_alive\.topic\>\.json*
+
 ```
 Chown tornado <topic>.json
 Chgrp tornado <topic>.json
@@ -166,12 +166,15 @@ Chmod g+r-x <topic>.json
 Chmod +rw <topic>.json
 Chmod o-xrw <topic>.json
 ```
-After configuration the nasts_topic please restart the required services:
-  systemctl restart tornado_nats_json_collector.service
-  Check service tornado_nats_json_collector  is up and running
-  systemctl status tornado_nats_json_collector.service
 
-Configuration of Tornado rules and filters for Agents using Tornado UI
+Restart and test status of nats\_json\_collector service
+
+```
+systemctl restart tornado_nats_json_collector.service
+systemctl status tornado_nats_json_collector.service
+```
+
+### Configuration of Tornado rules and filters for Agents using Tornado UI
 
 Add Filter for <itoafilter>
 
