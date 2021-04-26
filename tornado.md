@@ -44,34 +44,36 @@ Data Type: Number
 
 ![icinga_create_command_keepalive_check](icinga_create_command_keepalive_check.png)
 
-> Properties: 
->>  Command type: Plugin Check Command  
->>  Command name: keepalive_check  
->>  Coammnd: /usr/lib64/neteye/monitoring/plugins/check_dummy  
->>  Timeout :60  
->  
-> Custom properties:
->> Dummy State: 2
->>> Dummy Text : No keepalive message received from host within defined timeout
+```
+Command type: Plugin Check Command
+Command name: keepalive_check
+Command: /usr/lib64/neteye/monitoring/plugins/check_dummy
+Timeout :60
+```
+```
+Dummy State: 2
+Dummy Text: No keepalive message received from host within defined timeout
+```
 
 ![icinga_create_command_keepalive_check_state_arg](icinga_create_command_keepalive_check_state_arg.png)
 
->
->>  Argument name: state
->>  Description : state
->>  Value Type: String
->>  Value: $dummy_state$
->>  Position: 1
+```
+Argument name: state
+Description : state
+Value Type: String
+Value: $dummy_state$
+Position: 1
+```
 
 ![icinga_create_command_keepalive_check_output_arg](icinga_create_command_keepalive_check_output_arg.png)
 
-  Argument name: output_text
-  Description : output
-  Value Type: String
-  Value: $dummy_text$
-  Position: 2
-
-
+```
+Argument name: output_text
+Description : output
+Value Type: String
+Value: $dummy_text$
+Position: 2
+``` 
 
 ##### monitordata_check
 
