@@ -1,3 +1,5 @@
+# Heading Prerequisites
+
 To be able to setup endpoint Monitoring of AX Etw Tracing and SQL DMV Monitor following prerequisits must be fullfilled:
 
 1) Neteye 4.16
