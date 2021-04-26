@@ -201,12 +201,11 @@ Adding filter for <itoafilter> and new ruleset <create_and_process_events>
 
 Add Rule keepalive
 
->Name: keepalive
->position: 1
->description: keepalive message
->active: true
->continue after: true
->
+>Name: keepalive  
+>position: 1  
+>description: keepalive message  
+>active: true  
+>continue after: true  
 
 ```
 where:
@@ -285,11 +284,11 @@ action:
 
 Add Rule monitordata
 
->Name: monitordata
->position: 2
->description: monitordata message
->active: true
->continue after: true
+>Name: monitordata  
+>position: 2  
+>description: monitordata message  
+>active: true  
+>continue after: true  
 
 ```
 where:
