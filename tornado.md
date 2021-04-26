@@ -206,6 +206,7 @@ Add Rule keepalive
 >description: keepalive message
 >active: true
 >continue after: true
+>
 
 ```
 where:
@@ -283,6 +284,7 @@ action:
 ```
 
 Add Rule monitordata
+
 >Name: monitordata
 >position: 2
 >description: monitordata message
