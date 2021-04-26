@@ -176,37 +176,38 @@ systemctl status tornado_nats_json_collector.service
 
 ### Configuration of Tornado rules and filters for Agents using Tornado UI
 
-Add Filter for <itoafilter>
+Adding filter for <itoafilter> and new ruleset <create_and_process_events>
+  
+![tornado_ui_itoafilter](tornado_ui_itoafilter.png)
 
-Name:<itoafilter>
-parent Node : <parent>
-Active: true
-Description: filters all events of type "tornado.events.message" -> monitoring.events.keepalive
-
-Add following Filter:
+```
 {
-  "type": "AND",
-  "operators": [
-    {
-      "type": "equals",
-      "first": "${event.type}",
-      "second": "monitoring.events.keepalive"
-    }
-  ]
+  "description": "filters all events of type \"monitoring.events.message\"",
+  "active": true,
+  "filter": {
+    "type": "AND",
+    "operators": [
+      {
+        "type": "equals",
+        "first": "${event.type}",
+        "second": "monitoring.events.keepalive"
+      }
+    ]
+  }
 }
+```
 
-Add new Ruleset <create_and_process_events>
+![tornado_ui_rulesset](tornado_ui_rulesset.png)
 
-name: <create_and_process_events>
-Parrent Node: <parent>/<itoafilter>
+Add Rule keepalive
 
-Add Rule keepalive to Ruleset <create_and_process_events>
-Name: keepalive
-position: 1
-description: keepalive message
-active: true
-continue after: true
+>Name: keepalive
+>position: 1
+>description: keepalive message
+>active: true
+>continue after: true
 
+```
 where:
 {
   "type": "AND",
@@ -220,7 +221,6 @@ where:
 }
 
 with:
-```
 {
   "instance": {
     "from": "${event.payload.header.instance}",
@@ -240,9 +240,8 @@ with:
     ]
   }
 }
-```
+
 action:
-```
 [
   {
     "id": "smart_monitoring_check_result",
@@ -282,13 +281,15 @@ action:
   }
 ]
 ```
-Add Rule monitordata to Ruleset <create_and_process_events>
-Name: monitordata
-position: 2
-description: monitordata message
-active: true
-continue after: true
 
+Add Rule monitordata
+>Name: monitordata
+>position: 2
+>description: monitordata message
+>active: true
+>continue after: true
+
+```
 where:
 {
   "type": "AND",
@@ -323,7 +324,6 @@ with:
 }
 
 action:
-```
 [
   {
     "id": "smart_monitoring_check_result",
