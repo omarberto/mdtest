@@ -1,15 +1,16 @@
-# Heading Prerequisites
+### Prerequisites
 
-To be able to setup endpoint Monitoring of AX Etw Tracing and SQL DMV Monitor following prerequisits must be fullfilled:
+1. Neteye 4.16
+2. setup and configured Nats service on Neteye
+3. setup and configured Tornado service , Tornado nats collector services and Tornado UI on neteye master
+4. installed AX Etw Traxing and SQLDMV Monitor  version 0.5 or higher
+5. installed and configured Zampat repository (please refer to <https://github.com/zampat/neteye4/blob/master/doc/050_community_configs_init.md>) on the neteye master
 
-1) Neteye 4.16
-2) setup and configured Nats service on neteye
-3) setup and configured Tornado service , Tornado nats collector services and Tornado UI on neteye master
-4) installed AX Etw Traxing and SQLDMV Monitor  version 0.5 or higher
-5) installed and configured Zampat repository (please refer to <https://github.com/zampat/neteye4/blob/master/doc/050_community_configs_init.md>) on the neteye master
 Note: Zampat repository is required as configuration is based on the Host template generic-passive-host and Service template generic-passive-service
 
-define topic name to use for nats communication
+### Tornado Nats Collector Service
+
+Define topic name to use for nats communication
 
 <agent_monitor_alive.topic> = name which must be configured on nats.server and on axetwtracing and sqldmvmonitor config files.
 
