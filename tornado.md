@@ -140,6 +140,8 @@ create conf file *\<user\>.conf* in */neteye/shared/nats-server/conf/users.d*
 
 ### Configuration of tornado\_nats\_json\_collector service
 
+#### Topics definition
+
 The nats\_json\_collector service listens only to events of defined topics: create *\<agent\_monitor\_alive\.topic\>\.json* files in */neteye/shared/tornado\_nats\_json\_collector/topics* with the following syntax
 
 ```
@@ -157,7 +159,7 @@ The nats\_json\_collector service listens only to events of defined topics: crea
 
 >*collector_config* defines inner transformation rules from agents'messages to tornado messages and cannot be modified
 
->*tornado* group must have read rights on file *\<agent\_monitor\_alive\.topic\>\.json*
+#### Permissions on topic files
 
 ```
 Chown tornado <topic>.json
@@ -166,6 +168,10 @@ Chmod g+r-x <topic>.json
 Chmod +rw <topic>.json
 Chmod o-xrw <topic>.json
 ```
+
+>*tornado* group must have read rights on file *\<agent\_monitor\_alive\.topic\>\.json*
+
+#### 
 
 Restart and test status of nats\_json\_collector service
 
