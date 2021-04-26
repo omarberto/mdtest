@@ -77,53 +77,72 @@ Position: 2
 
 ##### monitordata_check
 
+```
   Command type: Plugin Check Command
   Command name: monitordata_check
   Command: /usr/lib64/neteye/monitoring/plugins/check_dummy
   Timeout :60
+```
+```
+  Dummy State: 2
+  Dummy Text : No monitordata message received from host within defined timeout
+```
 
-Custom properties:
+![icinga_create_command_keepalive_check_output_arg](icinga_create_command_monitordata_check_output_arg.png)
 
-- Dummy State: 2
-- Dummy Text : No monitordata message received from host within defined timeout
-
-Create agrumgents:
+```
 Argument name: state
 Description : state
 Value Type: String
 Value: $dummy_state$
 Position: 1
+```
 
+![icinga_create_command_keepalive_check_output_arg](icinga_create_command_monitordata_check_output_arg.png)
+
+```
 Argument name: output_text
 Description : output
 Value Type: String
 Value: $dummy_text$
 Position: 2
+``` 
 
-3. Create Service templates (generic_keepalive_service and generic_monitordata_service)
-create template Service "generic_keepalive_service"
+#### Create Service templates
 
+##### generic_keepalive_service
+
+![generic_keepalive_service_template](generic_keepalive_service_template.png)
+
+```
 Main properties
-    Name : generic_keepalive_service
-    imports: generic-passive-service
-    Check command: keepalive_check
-
+  Name : generic_keepalive_service
+  imports: generic-passive-service
+  Check command: keepalive_check
+```
+```
 Check execution
-    check_interval = 1m
-    retry_interval = 15s
-    enable_active_checks = yes
+  check_interval = 1m
+  retry_interval = 15s
+  enable_active_checks = yes
+```
 
-create template Service "generic_monitordata_service"
+##### generic_monitordata_service
 
+![generic_monitordata_service_template](generic_monitordata_service_template.png)
+
+```
 Main properties
-    Name : generic_monitordata_service
-    Imports : generic-passive-service
-    Check command: keepalive_check
-
+  Name : generic_monitordata_service
+  Imports : generic-passive-service
+  Check command: keepalive_check
+```
+```
 Check execution
-    check_interval : 10m
-    retry_interval : 15s
-    enable_active_checks : yes
+  check_interval : 10m  
+  retry_interval : 15s
+  enable_active_checks : yes
+```
 
 ### Configuration of nats user and permissions
 
