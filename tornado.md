@@ -119,16 +119,17 @@ Check execution
 
 Define permission for ax and sql agents on nats server
 
-create conf file *agents-nats-json-publisher.conf* in folder */neteye/shared/nats-server/conf/permissions.d*
+create conf file *agents-nats-json-publisher.conf* in */neteye/shared/nats-server/conf/permissions.d*
 
 ```
-  AGENT_MONITOR_ALIVE_METRICS = {
+  AGENT_MONITOR_ALIVE_METRICS = 
+  {
     publish = "tornado_nats_json.>"
   }
 ```
 
 Define user for ax and sql agents on nats server
-create conf file *<user>.conf* in */neteye/shared/nats-server/conf/users.d*
+create conf file *\<user\>.conf* in */neteye/shared/nats-server/conf/users.d*
 
 ```
   {
