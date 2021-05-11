@@ -8,12 +8,6 @@
 
 >Zampat repository is required as configuration is based on the Host template generic-passive-host and Service template generic-passive-service
 
-### Tornado Nats Collector Service
-
-Define topic name to use for nats communication
-
-<agent_monitor_alive.topic> = name which must be configured on nats.server and on axetwtracing and sqldmvmonitor config files.
-
 ### Icinga Directory Objects for EndPoint monitor
 
 Configuration of neteye Icinga Directory Objects for EndPoint monitor
@@ -144,27 +138,52 @@ Check execution
   enable_active_checks : yes
 ```
 
+
+### Setup for Nats messages
+
+Messages are sent from agents to tornado_nats_json_collector through the nats server (link) with publish-subscribe pattern: agent is a publisher and nats_json_collector on neteye is a subscriber. The subject for this publish-subscriber couple is called topic (now *<agent\_monitor\_alive\.topic\>*) and it has to be different from subjects used by other publisher/subscriber like e.g. telegraf because of diffent message formats. 
+Conventional topic names have "tornado_nats_json." as first part. (primo livello del namespace.
+
 ### Configuration of nats user and permissions
 
-Define permission for ax and sql agents on nats server
+Define permission for ax and sql agents on nats server \<user\>
 
-create conf file *agents-nats-json-publisher.conf* in */neteye/shared/nats-server/conf/permissions.d*
+In */neteye/shared/nats-server/conf/permissions.d/<user\>.conf* file add the new section e.g.
 
 ```
   AGENT_MONITOR_ALIVE_METRICS = 
   {
-    publish = "tornado_nats_json.>"
+    publish = "tornado_nats_json.foo.>"
   }
 ```
 
-Define user for ax and sql agents on nats server
-create conf file *\<user\>.conf* in */neteye/shared/nats-server/conf/users.d*
+At this point in */neteye/shared/nats-server/conf/users.d/\<user\>.conf* add the new permission
 
 ```
   {
-    user: "agents.pele.dev", 
+    user: "\<user\>", 
     permissions: $AGENT_MONITOR_ALIVE_METRICS
   }
+```
+
+(links?)
+
+#### Setup topic for agents 
+
+on axetwtracing and sqldmvmonitor config files topic configuration is in the tornado section 
+
+```
+#defines the nats channel to send keepalive & monitoring data infos to neteye server, disabled by default
+#[output.tornado]
+#topic = "tornado_nats_json.<topic>" #mandatory, it represents the subject on nats-server (configured in tornado_nats_json_collector topics on neteye)
+#keepaliveInterval = 5 #interval in seconds for keepalive message, if omitted default value is 5 seconds;
+#monitordataInterval = 30 #interval in seconds for monitordata message, if omitted default value is 30 seconds;
+#hostnameformat="fullqualified" #default is "fullqualified", otherwise put "hostonly"
+#tornado_dedicated_connection: all the following settings must be used to open a dedicated connection for tornado messages (in case destination addresses and/or certifcate are different)
+#address = "TORNADO-NATS-ADDRESS" #optional (see tornado_dedicated_connection above)
+#secure = true #optional (see tornado_dedicated_connection above) set as true if TLS is needed, if omitted default value is false
+#tls_cert = "<PATHVALUE>\\<filename>.crt.pem" #optional (see tornado_dedicated_connection above) certificate path
+#tls_key = "<PATHVALUE>\\<filename>.key.pem"  #optional (see tornado_dedicated_connection above) private key path
 ```
 
 ### Configuration of tornado\_nats\_json\_collector service
@@ -186,7 +205,9 @@ The nats\_json\_collector service listens only to events of defined topics: crea
   }
 ```
 
->*collector_config* defines inner transformation rules from agents'messages to tornado messages and cannot be modified
+>*collector_config* defines inner transformation rules from agents'messages to tornado messages and in case you intend to modify it you have to modify tornado filters & rules accordingly
+
+link per approfondimenti
 
 #### Permissions on topic files
 
