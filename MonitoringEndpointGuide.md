@@ -143,8 +143,7 @@ Check execution
 
 Messages are sent from agents to tornado_nats_json_collector via nats-server with publish-subscribe pattern: agent is a publisher and nats_json_collector on neteye is a subscriber. The subject for this publish-subscriber couple is called topic (now *<agent\_monitor\_alive\.topic\>*) and it has to be different from subjects used by other publisher/subscriber like e.g. telegraf because of diffent message formats. 
 Conventional topic names have "tornado_nats_json." as first level of the hierarchy.
-
-[website][an_awesome_website_link] https://docs.nats.io/nats-concepts/subjects#subject-hierarchies
+https://docs.nats.io/nats-concepts/subjects#subject-hierarchies
 
 ### Configuration of nats user and permissions
 
@@ -190,6 +189,8 @@ on axetwtracing and sqldmvmonitor config files topic configuration is in the tor
 
 ### Configuration of tornado\_nats\_json\_collector service
 
+https://github.com/WuerthPhoenix/tornado/blob/develop/tornado/nats_json_collector/README.md
+
 #### Topics definition
 
 The nats\_json\_collector service listens only to events of defined topics: create *\<agent\_monitor\_alive\.topic\>\.json* files in */neteye/shared/tornado\_nats\_json\_collector/topics* with the following syntax
@@ -208,8 +209,6 @@ The nats\_json\_collector service listens only to events of defined topics: crea
 ```
 
 >*collector_config* defines inner transformation rules from agents'messages to tornado messages and in case you intend to modify it you have to modify tornado filters & rules accordingly
-
-link per approfondimenti
 
 #### Permissions on topic files
 
@@ -231,6 +230,10 @@ Restart and test status of nats\_json\_collector service
 systemctl restart tornado_nats_json_collector.service
 systemctl status tornado_nats_json_collector.service
 ```
+
+### Tornado
+
+https://github.com/WuerthPhoenix/tornado
 
 ### Configuration of Tornado rules and filters for Agents using Tornado UI
 
