@@ -1,4 +1,4 @@
-### Prerequisites
+## Prerequisites
 
 1. Neteye 4.16
 2. setup and configured Nats service on Neteye
