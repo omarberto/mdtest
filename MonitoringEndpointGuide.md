@@ -141,8 +141,10 @@ Check execution
 
 ### Setup for Nats messages
 
-Messages are sent from agents to tornado_nats_json_collector through the nats server (link) with publish-subscribe pattern: agent is a publisher and nats_json_collector on neteye is a subscriber. The subject for this publish-subscriber couple is called topic (now *<agent\_monitor\_alive\.topic\>*) and it has to be different from subjects used by other publisher/subscriber like e.g. telegraf because of diffent message formats. 
-Conventional topic names have "tornado_nats_json." as first part. (primo livello del namespace.
+Messages are sent from agents to tornado_nats_json_collector via nats-server with publish-subscribe pattern: agent is a publisher and nats_json_collector on neteye is a subscriber. The subject for this publish-subscriber couple is called topic (now *<agent\_monitor\_alive\.topic\>*) and it has to be different from subjects used by other publisher/subscriber like e.g. telegraf because of diffent message formats. 
+Conventional topic names have "tornado_nats_json." as first level of the hierarchy.
+
+[website][an_awesome_website_link] https://docs.nats.io/nats-concepts/subjects#subject-hierarchies
 
 ### Configuration of nats user and permissions
 
