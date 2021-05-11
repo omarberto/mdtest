@@ -8,7 +8,7 @@
 
 >Zampat repository is required as configuration is based on the Host template generic-passive-host and Service template generic-passive-service
 
-### Icinga Directory Objects for EndPoint monitor
+## Icinga Directory Objects for EndPoint monitor
 
 Configuration of neteye Icinga Directory Objects for EndPoint monitor
 
@@ -32,9 +32,9 @@ Caption : Dummy State
 Data Type: Number
 ```
 
-#### Command creation
+### Command creation
 
-##### keepalive_check:
+#### keepalive_check:
 
 ![icinga_create_command_keepalive_check](MonitoringEndpointGuide/icinga_create_command_keepalive_check.png)
 
@@ -69,7 +69,7 @@ Value: $dummy_text$
 Position: 2
 ``` 
 
-##### monitordata_check
+#### monitordata_check
 
 ```
   Command type: Plugin Check Command
@@ -102,9 +102,9 @@ Value: $dummy_text$
 Position: 2
 ``` 
 
-#### Create Service templates
+### Create Service templates
 
-##### generic_keepalive_service
+#### generic_keepalive_service
 
 ![generic_keepalive_service_template](MonitoringEndpointGuide/generic_keepalive_service_template.png)
 
@@ -121,7 +121,7 @@ Check execution
   enable_active_checks = yes
 ```
 
-##### generic_monitordata_service
+#### generic_monitordata_service
 
 ![generic_monitordata_service_template](MonitoringEndpointGuide/generic_monitordata_service_template.png)
 
@@ -139,10 +139,11 @@ Check execution
 ```
 
 
-### Setup for Nats messages
+## Setup for Nats messages
 
 Messages are sent from agents to tornado_nats_json_collector via nats-server with publish-subscribe pattern: agent is a publisher and nats_json_collector on neteye is a subscriber. The subject for this publish-subscriber couple is called topic (now *<agent\_monitor\_alive\.topic\>*) and it has to be different from subjects used by other publisher/subscriber like e.g. telegraf because of diffent message formats. 
 Conventional topic names have "tornado_nats_json." as first level of the hierarchy.
+
 https://docs.nats.io/nats-concepts/subjects#subject-hierarchies
 
 ### Configuration of nats user and permissions
@@ -167,9 +168,7 @@ At this point in */neteye/shared/nats-server/conf/users.d/\<user\>.conf* add the
   }
 ```
 
-(links?)
-
-#### Setup topic for agents 
+### Setup topic for agents 
 
 on axetwtracing and sqldmvmonitor config files topic configuration is in the tornado section 
 
@@ -231,7 +230,7 @@ systemctl restart tornado_nats_json_collector.service
 systemctl status tornado_nats_json_collector.service
 ```
 
-### Tornado
+## Tornado
 
 https://github.com/WuerthPhoenix/tornado
 
